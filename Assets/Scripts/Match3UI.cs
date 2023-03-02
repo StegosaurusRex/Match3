@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class Match3UI : MonoBehaviour {
-
+    public GameObject restartButton;
     [SerializeField] private Match3 match3;
 
     [SerializeField] private TextMeshProUGUI movesText;
@@ -33,11 +33,13 @@ public class Match3UI : MonoBehaviour {
 
     private void Match3_OnWin(object sender, System.EventArgs e) {
         winLoseTransform.gameObject.SetActive(true);
+        restartButton.SetActive(true);
         winLoseTransform.Find("text").GetComponent<TextMeshProUGUI>().text = "<color=#1ACC23>YOU WIN!</color>";
     }
 
     private void Match3_OnOutOfMoves(object sender, System.EventArgs e) {
         winLoseTransform.gameObject.SetActive(true);
+        restartButton.SetActive(true);
         winLoseTransform.Find("text").GetComponent<TextMeshProUGUI>().text = "<color=#CC411A>YOU LOSE!</color>";
     }
 
@@ -82,6 +84,10 @@ public class Match3UI : MonoBehaviour {
         scoreText.text = match3.GetScore().ToString();
         glassText.text = match3.GetGlassAmount().ToString();
     }
-
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+        
+    }
 
 }
